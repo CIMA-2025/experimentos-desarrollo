@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import "../static/Navbar.css";
 import { Dropdown } from "react-bootstrap";
 import logoTecmi from "../images/logotm.png";
@@ -5,6 +6,8 @@ import logoTecmi from "../images/logotm.png";
 import ProgressBar from "./ProgressBar";
 
 export default function Navbar({ percentage, blocks }) {
+  const { logout } = useAuth0()
+
   var numbersBlocks = [];
   for (var i = 1; i < blocks + 1; i++) {
     numbersBlocks.push(i);
@@ -38,9 +41,11 @@ export default function Navbar({ percentage, blocks }) {
             </Dropdown>
           </li>
           <li className="nav-item">
-            <a href="#" className="nav-link">
+            <button
+              onClick={() => logout({returnTo: window.location.origin})}
+            >
               Salir
-            </a>
+            </button>
           </li>
         </ul>
       </nav>
